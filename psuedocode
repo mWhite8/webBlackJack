@@ -1,0 +1,115 @@
+//pseudocode
+
+testMode{
+    //deck of cards not randomized
+    deck;
+    //should follow rules of game
+}
+
+dealer{
+String name;
+Integer dealerMoney;
+//displays prob the hidden card has a value of 10
+tenProbability();
+
+
+}
+
+players{
+    //stores info for each player
+    //may need hasmap
+    String name;
+    Integer humanMoney = 200;
+    Integer numberOfPlayers;
+
+}
+BlackJack{
+   
+    distributeCards(String hand);
+
+}
+
+deck{
+    //object deck to store independent data such as remaining cards
+    deck{
+    //keep count of how many cards have been used for each deck independently
+    cardCount;
+    //keeps track of how many cards are left
+    cardsLeft;
+    //the card that will be face up
+    faceUpCard;
+    }
+       
+    //to keep track of how many decks are chosen
+    int numDecks;
+    //might need hashmap or array
+    String deck;
+    //keep track of total cards left in game
+    int totalCards;
+    //randomly picks card for player/bot
+    Rdm cardPick();
+    //display cards
+    nextCardDisplay();
+}
+
+bots{
+    //might need array or hashmap to keep track of how many players are online
+    Integer numberOfBots;
+    String name;
+    String hand;
+    Integer botMoney = 200;
+    //using rand, can use function to determing risk level
+    riskLevel(int risk);
+
+}
+
+gameRules{
+    //can use to use switch for each game action such as "hit", "double", etc...
+    enum playOption();
+    // game rules and algorithms should be done here
+
+}
+
+money {
+//will handle the math and logic of money
+displayCash();
+Integer remainingCash;
+//makes sure dealer always has cash
+dealerCash();
+
+}
+
+main{
+    startGame();
+    //displays who's turn it is
+    playerTurn();
+    //20 seconds to take turn
+    Integer playTimer = 20;
+}
+
+
+pointCount{
+    //shows the points for each hand
+    pointDisplay(String cards);
+    //logic to stop from drawing cards after 21 has been exceeded
+    if points >21, stop;
+
+    //logic to check for blackjack
+    if points == 21..
+    ifelse dealerPts == 21
+    ifelse playerPts ==21
+    ifelse botPts ==21
+    else take money
+
+}
+
+gamerServer{
+
+    //gameserver stuff here
+}
+
+hints{
+    //logic to display hints on screen
+    displayHints(jbutton hint);
+
+}
