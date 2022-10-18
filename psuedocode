@@ -10,8 +10,9 @@ dealer{
 String name;
 Integer dealerMoney;
 //displays prob the hidden card has a value of 10
-tenProbability();
-
+double tenProbability();
+Hand DealerHand;
+double netMoney;
 
 }
 
@@ -21,15 +22,36 @@ players{
     String name;
     Integer humanMoney = 200;
     Integer numberOfPlayers;
+    player listOfplayers;
+    boolean playercount();
+    
 
 }
+
+
+Player{
+Hand hand;
+String id;
+boolean in;
+getHand();
+}
+
+
 BlackJack{
    
-    distributeCards(String hand);
+    distributes(String hand);
+    void startgame(listOfPlayers, Deck);
+    void startNewGame(listOfPlayers, Deck);
 
 }
 
 deck{
+
+    int hearts, spades, clovers, diamonds = 13;
+    arrayList<card> deck;
+    int totalcards;
+    void shuffle(arrayList cards);
+    
     //object deck to store independent data such as remaining cards
     deck{
     //keep count of how many cards have been used for each deck independently
@@ -48,23 +70,48 @@ deck{
     int totalCards;
     //randomly picks card for player/bot
     Rdm cardPick();
+    getRandom();
     //display cards
-    nextCardDisplay();
+    void nextCardDisplay(arrayList cards);
 }
+
+
+card{
+int value;
+string Suite;
+int getVal();
+
+}
+
+hand{
+arrayList<card> cards;
+int totalVal;
+int getVal();
+void updateDeck(deck); 
+}
+
 
 bots{
     //might need array or hashmap to keep track of how many players are online
+    
+    Hand hand;
+    String behavior;
+    
     Integer numberOfBots;
     String name;
     String hand;
-    Integer botMoney = 200;
+    //Integer botMoney = 200;
+    double balance = 200;
+    boolean in;
     //using rand, can use function to determing risk level
-    riskLevel(int risk);
+    void riskLevel(behavior);
+    hand getHand();
 
 }
 
 gameRules{
     //can use to use switch for each game action such as "hit", "double", etc...
+    enum rules();
     enum playOption();
     // game rules and algorithms should be done here
 
@@ -72,7 +119,8 @@ gameRules{
 
 money {
 //will handle the math and logic of money
-displayCash();
+void displayCash();
+void bet(player);
 Integer remainingCash;
 //makes sure dealer always has cash
 dealerCash();
@@ -100,6 +148,8 @@ pointCount{
     ifelse playerPts ==21
     ifelse botPts ==21
     else take money
+    
+    winner(listOfPlayers, Deck);
 
 }
 
@@ -110,6 +160,7 @@ gamerServer{
 
 hints{
     //logic to display hints on screen
-    displayHints(jbutton hint);
+    String displayHints(jbutton hint);
+    Arraylist<String> hints;
 
 }
