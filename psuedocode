@@ -164,3 +164,435 @@ hints{
     Arraylist<String> hints;
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*CODE FROM THE TIC TAC TOE GAME
+
+
+
+//App.java
+package uta.cse3310;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
+import java.nio.ByteBuffer;
+import java.util.Collections;
+
+import org.java_websocket.WebSocket;
+import org.java_websocket.drafts.Draft;
+import org.java_websocket.drafts.Draft_6455;
+import org.java_websocket.handshake.ClientHandshake;
+import org.java_websocket.server.WebSocketServer;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.Vector;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+public class App extends WebSocketServer {
+  // All games currently underway on this server are stored in
+  // the vector ActiveGames
+  Vector<Game> ActiveGames = new Vector<Game>();
+
+  int GameId = 1;
+
+  public App(int port) {
+    super(new InetSocketAddress(port));
+  }
+
+  public App(InetSocketAddress address) {
+    super(address);
+  }
+
+  public App(int port, Draft_6455 draft) {
+    super(new InetSocketAddress(port), Collections.<Draft>singletonList(draft));
+  }
+
+  @Override
+  public void onOpen(WebSocket conn, ClientHandshake handshake) {
+
+    System.out.println(conn.getRemoteSocketAddress().getAddress().getHostAddress() + " connected");
+
+    ServerEvent E = new ServerEvent();
+
+    // search for a game needing a player
+    Game G = null;
+    for (Game i : ActiveGames) {
+      if (i.Players == uta.cse3310.PlayerType.XPLAYER) {
+        G = i;
+        System.out.println("found a match");
+      }
+    }
+
+    // No matches ? Create a new Game.
+    if (G == null) {
+      G = new Game();
+      G.GameId = GameId;
+      GameId++;
+      // Add the first player
+      G.Players = uta.cse3310.PlayerType.XPLAYER;
+      ActiveGames.add(G);
+      System.out.println(" creating a new Game");
+    } else {
+      // join an existing game
+      System.out.println(" not a new game");
+      G.Players = uta.cse3310.PlayerType.OPLAYER;
+      G.StartGame();
+    }
+    System.out.println("G.players is " + G.Players);
+    // create an event to go to only the new player
+    E.YouAre = G.Players;
+    E.GameId = G.GameId;
+    // allows the websocket to give us the Game when a message arrives
+    conn.setAttachment(G);
+
+    Gson gson = new Gson();
+    // Note only send to the single connection
+    conn.send(gson.toJson(E));
+    System.out.println(gson.toJson(E));
+
+    // The state of the game has changed, so lets send it to everyone
+    String jsonString;
+    jsonString = gson.toJson(G);
+
+    System.out.println(jsonString);
+    broadcast(jsonString);
+
+  }
+
+  @Override
+  public void onClose(WebSocket conn, int code, String reason, boolean remote) {
+    System.out.println(conn + " has closed");
+    // Retrieve the game tied to the websocket connection
+    Game G = conn.getAttachment();
+    G = null;
+  }
+
+  @Override
+  public void onMessage(WebSocket conn, String message) {
+    System.out.println(conn + ": " + message);
+
+    // Bring in the data from the webpage
+    // A UserEvent is all that is allowed at this point
+    GsonBuilder builder = new GsonBuilder();
+    Gson gson = builder.create();
+    UserEvent U = gson.fromJson(message, UserEvent.class);
+    System.out.println(U.Button);
+
+    // Get our Game Object
+    Game G = conn.getAttachment();
+    G.Update(U);
+
+    // send out the game state every time
+    // to everyone
+    String jsonString;
+    jsonString = gson.toJson(G);
+
+    System.out.println(jsonString);
+    broadcast(jsonString);
+  }
+
+  @Override
+  public void onMessage(WebSocket conn, ByteBuffer message) {
+    System.out.println(conn + ": " + message);
+  }
+
+  @Override
+  public void onError(WebSocket conn, Exception ex) {
+    ex.printStackTrace();
+    if (conn != null) {
+      // some errors like port binding failed may not be assignable to a specific
+      // websocket
+    }
+  }
+
+  @Override
+  public void onStart() {
+    System.out.println("Server started!");
+    setConnectionLostTimeout(0);
+  }
+
+  public static void main(String[] args) {
+
+    // Set up the http server
+    int port = 9080;
+    HttpServer H = new HttpServer(port, "./html");
+    H.start();
+    System.out.println("http Server started on port:" + port);
+
+    // create and start the websocket server
+
+    port = 9880;
+    App A = new App(port);
+    A.start();
+    System.out.println("websocket Server started on port: " + port);
+
+  }
+}
+
+
+
+
+
+
+
+
+//Game.java
+package uta.cse3310;
+
+public class Game {
+    public PlayerType Players;
+    public PlayerType CurrentTurn;
+    public PlayerType[] Button;
+    public String[] Msg;
+    public int GameId;
+
+    Game() {
+        Button = new PlayerType[9];
+        // initialize it
+        for (int i = 0; i < Button.length; i++) {
+            Button[i] = PlayerType.NOPLAYER;
+        }
+
+        Msg = new String[2];
+        Players = PlayerType.XPLAYER;
+        CurrentTurn = PlayerType.NOPLAYER;
+        Msg[0] = "Waiting for other player to join";
+        Msg[1] = "";
+    }
+
+    public void StartGame() {
+        // X player goes first. Because that is how it is.
+        Msg[0] = "You are X. Your turn";
+        Msg[1] = "You are O. Other players turn";
+        CurrentTurn = PlayerType.XPLAYER;
+    }
+
+    private boolean CheckLine(int i, int j, int k, PlayerType player) {
+        return player == Button[i] && player == Button[j] && player == Button[k];
+    }
+
+    private boolean CheckHorizontal(PlayerType player) {
+        return CheckLine(0, 1, 2, player) | CheckLine(3, 4, 5, player) | CheckLine(6, 7, 8, player);
+    }
+
+    private boolean CheckVertical(PlayerType player) {
+        return CheckLine(0, 3, 6, player) | CheckLine(1, 4, 7, player) | CheckLine(2, 5, 8, player);
+    }
+
+    private boolean CheckDiagonal(PlayerType player) {
+        return CheckLine(0, 4, 8, player) | CheckLine(2, 4, 6, player);
+    }
+
+    private boolean CheckBoard(PlayerType player) {
+        return CheckHorizontal(player) | CheckVertical(player) | CheckDiagonal(player);
+    }
+
+    private boolean CheckDraw(PlayerType player) {
+        // how to check for a draw?
+        // Are all buttons are taken ?
+        int count = 0;
+        for (int i = 0; i < Button.length; i++) {
+            if (Button[i] == PlayerType.NOPLAYER) {
+                count = count + 1;
+            }
+        }
+
+        return count == 0;
+    }
+
+    // This function returns an index for each player
+    // It does not depend on the representation of Enums
+    public int PlayerToIdx(PlayerType P) {
+        int retval = 0;
+        if (P == PlayerType.XPLAYER) {
+            retval = 0;
+        } else {
+            retval = 1;
+        }
+        return retval;
+    }
+
+    public void Update(UserEvent U) {
+        System.out.println("The user event is " + U.PlayerIdx + "  " + U.Button);
+
+        if ((CurrentTurn == U.PlayerIdx) && (CurrentTurn == PlayerType.OPLAYER || CurrentTurn == PlayerType.XPLAYER)) {
+            // Move is legitimate, lets do what was requested
+
+            // Is the button not taken by X or O?
+            if (Button[U.Button] == PlayerType.NOPLAYER) {
+                System.out.println("the button was 0, setting it to" + U.PlayerIdx);
+                Button[U.Button] = U.PlayerIdx;
+                if (U.PlayerIdx == PlayerType.OPLAYER) {
+                    CurrentTurn = PlayerType.XPLAYER;
+                    Msg[1] = "Other Players Move.";
+                    Msg[0] = "Your Move.";
+                } else {
+                    CurrentTurn = PlayerType.OPLAYER;
+                    Msg[0] = "Other Players Move.";
+                    Msg[1] = "Your Move.";
+                }
+            } else {
+                Msg[PlayerToIdx(U.PlayerIdx)] = "Not a legal move.";
+            }
+
+            // Check for winners, losers, and a draw
+
+            if (CheckBoard(PlayerType.XPLAYER)) {
+                Msg[0] = "You Win!";
+                Msg[1] = "You Lose!";
+                CurrentTurn = PlayerType.NOPLAYER;
+            } else if (CheckBoard(PlayerType.OPLAYER)) {
+                Msg[1] = "You Win!";
+                Msg[0] = "You Lose!";
+                CurrentTurn = PlayerType.NOPLAYER;
+            } else if (CheckDraw(U.PlayerIdx)) {
+                Msg[0] = "Draw";
+                Msg[1] = "Draw";
+                CurrentTurn = PlayerType.NOPLAYER;
+            }
+        }
+    }
+
+    public void Tick() {
+        // this function can be called periodically if a
+        // timer is needed.
+
+    }
+}
+// In windows, shift-alt-F formats the source code
+// In linux, it is ctrl-shift-I
+
+
+
+
+
+//HttpServer.java
+
+package uta.cse3310;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import net.freeutils.httpserver.HTTPServer;
+import net.freeutils.httpserver.HTTPServer.ContextHandler;
+import net.freeutils.httpserver.HTTPServer.FileContextHandler;
+import net.freeutils.httpserver.HTTPServer.Request;
+import net.freeutils.httpserver.HTTPServer.Response;
+import net.freeutils.httpserver.HTTPServer.VirtualHost;
+
+// http server include is a GPL licensed package from
+//            http://www.freeutils.net/source/jlhttp/
+
+public class HttpServer {
+
+    private static final String HTML = "./html";
+    int port = 8080;
+    String dirname = HTML;
+
+    public HttpServer(int portNum, String dirName) {
+        System.out.println("creating http server port " + portNum);
+        port = portNum;
+        dirname = dirName;
+    }
+
+    public void start() {
+        System.out.println("in httpd server start");
+        try {
+            File dir = new File(dirname);
+            if (!dir.canRead())
+                throw new FileNotFoundException(dir.getAbsolutePath());
+            // set up server
+            HTTPServer server = new HTTPServer(port);
+            VirtualHost host = server.getVirtualHost(null); // default host
+            host.setAllowGeneratedIndex(true); // with directory index pages
+            host.addContext("/", new FileContextHandler(dir));
+            host.addContext("/api/time", new ContextHandler() {
+                public int serve(Request req, Response resp) throws IOException {
+                    long now = System.currentTimeMillis();
+                    resp.getHeaders().add("Content-Type", "text/plain");
+                    resp.send(200, String.format("%tF %<tT", now));
+                    return 0;
+                }
+            });
+            server.start();
+            System.out.println("HTTPServer is listening on port " + port);
+        } catch (Exception e) {
+            System.err.println("error: " + e);
+        }
+
+    }
+
+}
+
+
+
+
+
+
+//PlayerType.java
+
+package uta.cse3310;
+
+// A player can be an X or an O
+
+public enum PlayerType {
+    NOPLAYER, XPLAYER, OPLAYER
+}
+
+
+
+
+
+
+//ServerEvent.java
+
+package uta.cse3310;
+
+public class ServerEvent {
+    PlayerType YouAre; // Either an XPLAYER or a YPLAYER
+    int GameId;
+    
+}
+
+
+
+
+
+//UserEvent.java
+
+package uta.cse3310;
+// User events are sent from the webpage to the server
+
+public class UserEvent {
+    int GameId; // the game ID on the server
+    PlayerType PlayerIdx; // either an XPLAYER or an OPLAYER
+    int Button; // button number from 0 to 8
+}
+
+
+
+
+
+
+*/
+
+
+
