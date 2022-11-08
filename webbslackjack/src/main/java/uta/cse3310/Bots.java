@@ -2,7 +2,7 @@ package uta.cse3310;
 
 public class Bots extends Hand
 {
-    //edit to test github push
+    //edit to test if it pushed
     Hand hand;
     String behavior;
     double balance = 200;
