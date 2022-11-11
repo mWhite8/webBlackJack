@@ -10,23 +10,34 @@ import java.util.Random;
 public class Risk {
 
     
-    Random r = new Random();
+    Random r = new Random(); //may not need random 
     int riskChoice = 0;
-    int risk = r.nextInt();
+    //int risk = r.nextInt();
 
-    public int riskLevel(String name){
+    public boolean riskLevel(String name, int total){
+       // int risk = r.nextInt();
 
         switch(name){
             case "Minimal":
-            riskChoice= 1;
+            if(total <= 16){
+                return true;
+            }
+            else return false;
             case "Normal":
-            riskChoice = 2;
+            if(total <= 17){
+                return true;
+            }
+            else return false;
+
             case "High":
-            riskChoice = 3;
+            if (toal <= 18){
+                return true;
+            }
+            else return false;
             case "Counter":
-            riskChoice = 4;
+            //not sure on logic here
             default:
-            return 0;
+            return false;
         }
 
         return riskChoice;
