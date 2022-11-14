@@ -1,6 +1,7 @@
 
 // Pedro Santana - adding random class to handle all of the risk levels for players and bots in one place
-
+//pass in player name, their risk choice, and their total points. This will return true if it 
+// meets the points requirement to draw another card
 
 
 
