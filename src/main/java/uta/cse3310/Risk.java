@@ -18,6 +18,8 @@ public class Risk {
     public boolean riskLevel(String name, int total){
        // int risk = r.nextInt();
        //boolean riskChoice = false;
+       //DEALER MUST BE SET TO "MINIMAL" PER GAME RULES
+       //Pedro
 
         switch(name){
             case "Minimal":

@@ -4,7 +4,7 @@ public class Player extends Hand
 {
     Hand hand;
     String ID;
-    double balance = 200;
+    double netMoney = 200;
     boolean in;
 
     public Hand getHand() 
