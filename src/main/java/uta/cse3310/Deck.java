@@ -11,6 +11,20 @@ public class Deck extends Card
     ArrayList<Card> deck;
     int totalcards;
 
+    //check to make sure there are enough cards to play
+    //arbitrarily chose 12 cards per player, if fewer, add cards
+    //Pedro
+    
+    public void checkDeck(int numPlayers, int totalCardsLeft){
+        int minCards = 12*numPlayers;
+
+        if(totalCardsLeft < minCards){
+            //add one deck here - 
+            //Pedro
+        }
+
+    }
+
     public void shuffle(ArrayList<Card> deck)
     {
 
