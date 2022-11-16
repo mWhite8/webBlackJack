@@ -58,7 +58,7 @@ public class App extends WebSocketServer{
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.create();
         //UserEvent U = gson.fromJson(message, UserEvent.class);
-        System.out.println(U.Button);
+       // System.out.println(U.Button);
 
         // Get our Game Object
         //new line but this time its again

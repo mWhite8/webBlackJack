@@ -8,7 +8,7 @@ public class Bots extends Hand
     double netMoney = 200;
     boolean in;
 
-    in = Risk.riskLevel(behavior, points);
+    //in = Risk.riskLevel(behavior, points);
     
 
     
