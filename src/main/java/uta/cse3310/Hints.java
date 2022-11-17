@@ -1,8 +1,10 @@
 package uta.cse3310;
 
+
 import java.util.ArrayList;
 
 public class Hints {
+    /* 
     ArrayList<String> hints;
 
     // take parameters cardpoints, and nextcard from deck
@@ -19,4 +21,6 @@ public class Hints {
     }
 
     //String hint = null;return hint;
+
+     */
 }
