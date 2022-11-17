@@ -1,40 +1,14 @@
-// Katherine Parks
-// Fall 2022
-// CSE 3310
-
 package uta.cse3310;
 
-import java.util.ArrayList;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import uta.cse3310.UserEvent.UserEventType;
-
-
-public class BlackJack 
-{
+public class BlackJack {
     
 
-    /*public void startGame()
-     {
-        System.out.println("creating a Game Object");
-    }
+    
 
-    }
-
-    public void startNewGame(Player listOfPlayers, ArrayList<Card> deck)
-    {
-            
-    }
-
-    public static void main(String[] args) 
-    {  
-        
-    }  */
+    
 
 
-
+    /* 
 
     private ArrayList<Player> players = new ArrayList<>();
     private int turn; // player ID that has the current turn
@@ -95,6 +69,5 @@ public class BlackJack
         System.out.println("creating a Game Object");
     }
 
-
-
+     */
 }
