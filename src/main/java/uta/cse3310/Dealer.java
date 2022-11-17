@@ -1,8 +1,10 @@
 package uta.cse3310;
 
-public class Dealer
-{
-    Hand dealerHand;
+public class Dealer {
+
+    /*
+     * 
+     *   Hand dealerHand;
     double netMoney;
 
     public double tenProbability()
@@ -23,5 +25,7 @@ public class Dealer
         prob = (double) num_of_tens/card_count;
         return prob;
     }
-
+     * 
+     */
+    
 }
