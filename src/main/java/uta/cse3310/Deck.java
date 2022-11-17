@@ -1,9 +1,10 @@
 package uta.cse3310;
 
 import java.util.ArrayList;
-
+ 
 public class Deck extends Card
 {
+    /* 
     int hearts = 13;
     int spades = 13;
     int clovers = 13;
@@ -41,4 +42,6 @@ public class Deck extends Card
         Card card = null;
         return card;
     }
+
+    */
 }
