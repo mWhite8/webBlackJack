@@ -1,8 +1,10 @@
 package uta.cse3310;
 
-public class Bots extends Hand
-{
-    Hand hand;
+public class Bots {
+
+    /*
+     * 
+     *     Hand hand;
     String behavior;
     int points;
     double netMoney = 200;
@@ -17,4 +19,8 @@ public class Bots extends Hand
     {
         return hand;
     }
+     * 
+     * 
+     */
+    
 }
