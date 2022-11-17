@@ -1,10 +1,11 @@
 package uta.cse3310;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
  
-public class Deck extends Card
+public class Deck
 {
-    /* 
     int hearts = 13;
     int spades = 13;
     int clovers = 13;
@@ -12,6 +13,22 @@ public class Deck extends Card
     ArrayList<Card> deck;
     int totalcards;
 
+    //Reety
+    //Initializing deck
+    public Deck()
+    {
+        deck = new ArrayList<Card>();
+
+        for (Card.Suit s : Card.Suit.values())
+        {
+            for (Card.Rank r : Card.Rank.values())
+            {
+                deck.add(new Card(r, s));
+            }
+        }
+
+        totalcards = deck.size();
+    }
     //check to make sure there are enough cards to play
     //arbitrarily chose 12 cards per player, if fewer, add cards
     //Pedro
@@ -26,9 +43,11 @@ public class Deck extends Card
 
     }
 
-    public void shuffle(ArrayList<Card> deck)
+    //Reety
+    //Shuffle using random number generator
+    public void shuffle()
     {
-
+        Collections.shuffle(deck, new Random());
     }
 
     public void nextCardDisplay(ArrayList<Card> deck)
@@ -36,12 +55,15 @@ public class Deck extends Card
 
     }
 
+    //Reety
     public Card getRandom()
     {
-        //placeholder until functionality is added
-        Card card = null;
-        return card;
+        Random rand = new Random();
+        int randInt = rand.nextInt(totalcards);
+        Card randCard = deck.remove(randInt);
+        totalcards--;
+        return randCard;
     }
 
-    */
+    
 }

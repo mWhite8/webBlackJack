@@ -2,9 +2,7 @@ package uta.cse3310;
 
 public class Dealer {
 
-    /*
-     * 
-     *   Hand dealerHand;
+    Hand dealerHand;
     double netMoney;
 
     public double tenProbability()
@@ -14,9 +12,9 @@ public class Dealer {
         int card_count = dealerHand.cards.size();
         int num_of_tens = 0;
         
-        for (int i = 0; i < card_count; i++)
+        for (Card c : dealerHand.cards)
         {
-            if (dealerHand.cards.get(i).getValue() == 10)
+            if (c.getRank() == Card.Rank.TEN)
             {
                 num_of_tens++;
             }
@@ -25,7 +23,4 @@ public class Dealer {
         prob = (double) num_of_tens/card_count;
         return prob;
     }
-     * 
-     */
-    
 }
