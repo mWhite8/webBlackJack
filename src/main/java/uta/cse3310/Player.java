@@ -1,6 +1,10 @@
 package uta.cse3310;
 
-import com.google.gson.Gson;
+public class Player {
+
+    /*
+     * 
+     * import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Player extends Hand
@@ -34,3 +38,7 @@ public class Player extends Hand
             //Cards[i].value = Card.Value.valueOf("FIVE");
         }
 }}
+     * 
+     */
+    
+}
