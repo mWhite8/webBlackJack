@@ -1,7 +1,10 @@
 package uta.cse3310;
 
-public class Card 
-{
+public class Cards {
+
+    /*
+     * 
+     * 
     int value;
     String Suite;
 
@@ -9,4 +12,7 @@ public class Card
     {
         return value;
     }
+     * 
+     */
+    
 }
