@@ -1,6 +1,13 @@
 package uta.cse3310;
 
-public class BlackJack {
+import java.util.ArrayList;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import uta.cse3310.UserEvent.UserEventType;
+
+public class BlackJack extends Player{
     
 
     
@@ -8,7 +15,7 @@ public class BlackJack {
     
 
 
-    /* 
+    
 
     private ArrayList<Player> players = new ArrayList<>();
     private int turn; // player ID that has the current turn
@@ -69,5 +76,5 @@ public class BlackJack {
         System.out.println("creating a Game Object");
     }
 
-     */
+     
 }

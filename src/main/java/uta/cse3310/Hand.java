@@ -12,7 +12,7 @@ public class Hand
     //Reety
     //Initialize hand
     //Pull two cards from deck
-    public Hand(Deck d)
+    public Hand(Deck d) 
     {
         deck = d;
         cards = new ArrayList<Card>();

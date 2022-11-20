@@ -7,10 +7,9 @@ public class UserEvent {
     int Button; // button number from 0 to 8
 
 
-    /*FROM GITHUB, not sure if really needed
-     * 
-     * 
-     * public enum UserEventType {
+    
+      
+      public enum UserEventType {
         NAME, STAND, HIT, CALL;
 
         private UserEventType() {
@@ -20,5 +19,5 @@ public class UserEvent {
     UserEventType event;
     int playerID;
     String name;
-     */
+     
 }
