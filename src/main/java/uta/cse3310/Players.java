@@ -2,7 +2,7 @@ package uta.cse3310;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-public class Players extends Player
+public class Players //extends Player
 {
     /* 
     Player listOfPlayers;

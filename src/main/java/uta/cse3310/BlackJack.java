@@ -7,7 +7,7 @@ import com.google.gson.GsonBuilder;
 
 import uta.cse3310.UserEvent.UserEventType;
 
-public class BlackJack extends Player{
+public class BlackJack {//extends Player{
     
 
     
@@ -46,7 +46,7 @@ public class BlackJack extends Player{
         UserEvent event = gson.fromJson(msg, UserEvent.class);
 
         if (event.event == UserEventType.NAME) {
-            players.get(event.playerID).SetName(event.name);
+          //  players.get(event.playerID).SetName(event.name);
         }
 
     }
