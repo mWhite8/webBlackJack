@@ -2,6 +2,8 @@ package uta.cse3310;
 
 public class Card {
 
+  /* 
+
     //Reety
     //Each rank has an int value you can get by using getValue()
     enum Suit {SPADES, HEARTS, DIAMONDS, CLUBS};
@@ -38,6 +40,27 @@ public class Card {
     {
         return suit;
     }
-    
+    */
+
+
+
+    public enum Suite {
+        HEARTS, CLUBS, DIAMONDS, SPADES
+    }
+
+    public enum Value {
+        ACE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE,
+        TEN, JACK, QUEEN, KING
+    }
+
+    public Suite suite;
+    public Value value;
+
+    public Card() {
+
+    }
+
+
+
     
 }

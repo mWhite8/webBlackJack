@@ -9,10 +9,10 @@ public class Bots {
     int points;
     double netMoney = 200;
     double betMoney;
-    boolean in;
+    //boolean in;
     
 
-    allin = Risk.riskLevel(behavior, points);
+    //allin = Risk.riskLevel(behavior, points);
     
 
     
