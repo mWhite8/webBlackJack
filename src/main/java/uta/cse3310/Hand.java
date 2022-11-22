@@ -12,6 +12,8 @@ public class Hand
     //Reety
     //Initialize hand
     //Pull two cards from deck
+
+    /*
     public Hand(Deck d) 
     {
         deck = d;
@@ -20,6 +22,11 @@ public class Hand
         cards.add(deck.getRandom());
         cards.add(deck.getRandom());
     }
+*/
+
+
+
+/* 
 
     //Reety
     //Calculating value of hand
@@ -44,6 +51,8 @@ public class Hand
         totalVal += numOfAces * chosenVal;
         return totalVal;
     }
+
+    */
 
     public void updateDeck()
     {

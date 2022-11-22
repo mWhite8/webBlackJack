@@ -6,16 +6,16 @@ import java.util.Random;
  
 public class Deck
 {
-    int hearts = 13;
-    int spades = 13;
-    int clovers = 13;
-    int diamonds = 13;
-    ArrayList<Card> deck;
-    int totalcards;
+    //int hearts = 13;
+    //int spades = 13;
+    //int clovers = 13;
+    //int diamonds = 13;
+    //ArrayList<Card> deck;
+    //int totalcards;
 
     //Reety
     //Initializing deck
-    public Deck()
+  /*   public Deck()
     {
         deck = new ArrayList<Card>();
 
@@ -29,6 +29,8 @@ public class Deck
 
         totalcards = deck.size();
     }
+*/
+
     //check to make sure there are enough cards to play
     //arbitrarily chose 12 cards per player, if fewer, add cards
     //Pedro
@@ -43,6 +45,8 @@ public class Deck
 
     }
 
+
+    /* 
     //Reety
     //Shuffle using random number generator
     public void shuffle()
@@ -64,6 +68,6 @@ public class Deck
         totalcards--;
         return randCard;
     }
-
+    */
     
 }
