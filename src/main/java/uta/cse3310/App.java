@@ -9,14 +9,6 @@ import com.google.gson.GsonBuilder;
 import uta.cse3310.UserEvent.UserEventType;
 
 public class App {
-    
-
-    
-
-    
-
-
-    
 
     private ArrayList<Player> players = new ArrayList<>();
     private int turn; // player ID that has the current turn

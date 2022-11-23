@@ -5,15 +5,15 @@ import java.util.ArrayList;
 
 public class Hand 
 {
-    Deck deck;
-    ArrayList<Card> cards;
-    int totalVal;
+    public Deck deck;
+    public ArrayList<Card> cards;
+    public int totalVal;
 
     //Reety
     //Initialize hand
     //Pull two cards from deck
 
-    /*
+    
     public Hand(Deck d) 
     {
         deck = d;
@@ -22,11 +22,15 @@ public class Hand
         cards.add(deck.getRandom());
         cards.add(deck.getRandom());
     }
-*/
 
 
 
-/* 
+
+    public Hand() {
+    }
+
+
+
 
     //Reety
     //Calculating value of hand
@@ -51,8 +55,6 @@ public class Hand
         totalVal += numOfAces * chosenVal;
         return totalVal;
     }
-
-    */
 
     public void updateDeck()
     {

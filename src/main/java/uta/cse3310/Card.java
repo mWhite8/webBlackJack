@@ -2,7 +2,7 @@ package uta.cse3310;
 
 public class Card {
 
-  /* 
+  
 
     //Reety
     //Each rank has an int value you can get by using getValue()
@@ -40,7 +40,6 @@ public class Card {
     {
         return suit;
     }
-    */
 
 
 
@@ -55,9 +54,8 @@ public class Card {
 
     public Suite suite;
     public Value value;
-
     public Card() {
-
+        
     }
 
 

@@ -3,7 +3,7 @@ package uta.cse3310;
 public class Dealer {
 
 
-    uta.cse3310.Hand Cards[];
+    Hand dealerHand;
     Integer ID;
     String behavior;
     String Name;
@@ -18,11 +18,11 @@ public class Dealer {
     
 
     public Dealer(int id) {
-        ID = id;
-        Name = "Dealer";
+        this.ID = id;
+        this.Name = "Dealer";
         // there is a lot smarter ways to do this,
         // but at least this is obvious
-        Cards = new Hand[2];
+        dealerHand = new Hand();
        // for (int i = 0; i < 2; i++) {
         //Cards[i].suite = ("DIAMOND");
         //    Cards[i].value = Hand.getValue();
@@ -31,7 +31,7 @@ public class Dealer {
 
 public Hand getHand() 
 {
-    return Cards[2];
+    return dealerHand;
 }
 
 public double getnetMoney(){
@@ -44,11 +44,11 @@ public double getBetMoney(){
 }
 
 
-   /*  public double tenProbability()
+   public double tenProbability()
     {
         double prob = 0;
         // Reety
-        int card_count = dealerHand.size();
+        int card_count = dealerHand.cards.size();
         int num_of_tens = 0;
         
         for (Card c : dealerHand.cards)

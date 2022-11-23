@@ -19,5 +19,5 @@ public class UserEvent {
     UserEventType event;
     int playerID;
     String name;
-     
+  public UserEvent(){}
 }
