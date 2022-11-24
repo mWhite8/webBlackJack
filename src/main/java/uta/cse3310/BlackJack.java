@@ -139,12 +139,12 @@ public class BlackJack extends WebSocketServer {
 
     // Create and start the http server
 
-    HttpServer H = new HttpServer(8080, "./html");
+    HttpServer H = new HttpServer(9083, "./html");
     H.start();
 
     // create and start the websocket server
 
-    int port = 8880;
+    int port = 9883;
 
     BlackJack s = new BlackJack(port);
     s.start();

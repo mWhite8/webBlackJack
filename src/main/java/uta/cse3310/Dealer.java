@@ -29,7 +29,7 @@ public class Dealer {
     //******************************** 
     //other
     //******************************** 
-   public double tenProbability()
+    public double tenProbability()
     {
         double prob = 0;
         // Reety
@@ -46,7 +46,7 @@ public class Dealer {
 
         prob = (double) num_of_tens/card_count;
         return prob;
-    }
+    } 
 
     public Dealer(int id) {
         this.ID = id;
