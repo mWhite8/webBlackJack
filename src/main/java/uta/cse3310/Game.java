@@ -13,14 +13,16 @@ public class Game {
 
 
 
-private ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
     private int turn; // player ID that has the current turn
     private transient int seconds;
     public ArrayList<Player> queue = new ArrayList<>(); 
     int GameIdx;
     Double pot;
     Player currentplayer;
+    Player firstPlayer;
     String gameMessage;
+    Deck d;
 
     public String exportStateAsJSON() {
         Gson gson = new Gson();
@@ -73,20 +75,37 @@ private ArrayList<Player> players = new ArrayList<>();
 
     }
     //malachi
+    //creates new player from the event that someone joins the game
     public void new_player(int Id, UserEvent event){
         Player tempPlayer = new Player(Id);
         tempPlayer.SetName(event.name);
     }
+    //gets the first player who is ready and makes it their turn
+    public Player whoIsFirst(){
+        firstPlayer = players.get(0);
+        currentplayer = firstPlayer;
+        return firstPlayer;
+    }
+    public void nextPlayer(){
+        //if there is a next player set it to that otherwise its a new round
+        if(players.indexOf(currentplayer) < players.size()-1){
+            currentplayer = players.get(players.indexOf(currentplayer)+1);
+        }
+        else{
+            currentplayer = firstPlayer;
+        }
+    }
+    //initializes new deck and shuffles it, and then starts the game;
     public Game() {
         System.out.println("creating a Game Object");
-        Deck d = new Deck();
+        d = new Deck();
         d.shuffle();
         pot = 0.0;
         GameIdx = 0;
     }
 
     //Game logic!!!!!!!!!!
-    
+    //beggining phase, loads all of the waiting players in until it is full and then relays the game message
     public void startOfGame(UserEvent event){
         if(event.event == UserEventType.NAME && event.playerID >=3){
             for(int i = 0;i<queue.size();i++){
@@ -103,6 +122,10 @@ private ArrayList<Player> players = new ArrayList<>();
             GameIdx++;
         }
         GetGameMessage();
+    }
+
+    public void stageOne(UserEvent event){
+        
     }
 
     public void GetGameMessage(){

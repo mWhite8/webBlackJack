@@ -1,9 +1,9 @@
 package uta.cse3310;
 
 
-public class Money extends Players
+public class Money 
 {
-    
+    double pot;
     public void displayCash(Player player)
     {
 

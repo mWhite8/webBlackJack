@@ -1,49 +1,34 @@
 package uta.cse3310;
 
 public class Dealer {
-
-
     Hand dealerHand;
     Integer ID;
     String behavior;
     String Name;
     int points;
-    double netMoney = 200;
-    double betMoney;
-
-        //int Id;
-    //String Name;
-    //uta.cse3310.Card Cards[];
+    double netMoney = 0;
     String LastMessageToPlayer;
-    
-
-    public Dealer(int id) {
-        this.ID = id;
-        this.Name = "Dealer";
-        // there is a lot smarter ways to do this,
-        // but at least this is obvious
-        dealerHand = new Hand();
-       // for (int i = 0; i < 2; i++) {
-        //Cards[i].suite = ("DIAMOND");
-        //    Cards[i].value = Hand.getValue();
-        //}
+    //******************************** 
+    //getters
+    //******************************** 
+    public Hand getHand() {
+        return dealerHand;
+    }
+    public double getnetMoney(){
+        return netMoney;
     }
 
-public Hand getHand() 
-{
-    return dealerHand;
-}
+    //******************************** 
+    //setters
+    //******************************** 
+    public void updateNetMoney(double d, String s){
+        if(s == "lost"){netMoney -= d;}
+        if(s == "gained"){netMoney += d;}
+    }
 
-public double getnetMoney(){
-    
-    return netMoney;
-}
-public double getBetMoney(){
-    
-    return betMoney;
-}
-
-
+    //******************************** 
+    //other
+    //******************************** 
    public double tenProbability()
     {
         double prob = 0;
@@ -62,5 +47,10 @@ public double getBetMoney(){
         prob = (double) num_of_tens/card_count;
         return prob;
     }
-    */
+
+    public Dealer(int id) {
+        this.ID = id;
+        this.Name = "Dealer";
+        dealerHand = new Hand();
+    }
 }
