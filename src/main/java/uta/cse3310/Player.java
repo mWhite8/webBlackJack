@@ -17,7 +17,7 @@ public class Player
     double betMoney;
     boolean in;
 
-  
+  tried using the code from webpoker and apply it here
 
     //int Id;
     //String Name;

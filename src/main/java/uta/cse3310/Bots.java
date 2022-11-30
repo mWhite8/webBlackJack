@@ -1,8 +1,11 @@
 package uta.cse3310;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Bots {
 
-    uta.cse3310.Hand Cards[];
+    uta.cse3310.Card Cards[];
+    //uta.cse3310.Hand Cards[];
     Integer ID;
     String behavior;
     String Name;
@@ -18,36 +21,43 @@ public class Bots {
     
   
 
-    //int Id;
+    int Id;
     //String Name;
     //uta.cse3310.Card Cards[];
     String LastMessageToPlayer;
     
 
     public Bots(int id) {
-        ID = id;
-        Name = "not set";
-        // there is a lot smarter ways to do this,
-        // but at least this is obvious
-        Cards = new Hand[2];
-       // for (int i = 0; i < 2; i++) {
-        //Cards[i].suite = ("DIAMOND");
-        //    Cards[i].value = Hand.getValue();
-        //}
+        this.ID = id;
+        this.Name = "not set";
+        this.Cards = new Card[2];
+        for (int i = 0; i < 2; i++) {
+            Cards[i] = new Card();
+            Cards[i].suite = Card.Suite.valueOf("SPADES");
+            Cards[i].value = Card.Value.valueOf("FIVE");
+        }
     }
 
-public Hand getHand() 
-{
-    return Cards[2];
-}
-
-public double getnetMoney(){
+    public void SetName(String N) {
+        this.Name = N;
+        LastMessageToPlayer="Welcome " + N + " to the game.";
+    }
+    //malachi
+    public void addMoney(double d){
+        this.netMoney += d;
+    }
     
-    return netMoney;
-}
-public double getBetMoney(){
+    public void lostMoney(double d){
+        this.netMoney -= d;
+    }
+    public int getId(){
+        return this.Id;
+    }
     
-    return betMoney;
-}
+    public String asJSONString() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+    
     
 }
