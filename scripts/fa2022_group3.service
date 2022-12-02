@@ -5,7 +5,7 @@ Description=webpoker
 Type=simple
 Restart=always
 RestartSec=10
-ExecStart=mvn exec:java -Dexec.mainClass=uta.cse3310.App
+ExecStart=mvn exec:java -Dexec.mainClass=uta.cse3310.BlackJack
 WorkingDirectory=/home/fa2022_group3
 
 [Install]
