@@ -99,7 +99,7 @@
 		<div class="col s12 m4" id="sidebar">
 			<div class="row">
 				<div class="col m6 s3">
-        			<button id="hit-button">Hit</button>
+        			<button id="hit-button"  onclick=buttonclick(0) >Hit</button>
         		</div>
         		<div class="col m6 s3">
         			<button id="double-down-button" class="secondary">Double</button>
@@ -205,14 +205,16 @@
     var idx = -1;
     var gameid = -1;
     class UserEvent {
-        Button = -1;
-        PlayerIdx = 0;
-        GameId = 0;
+		UserEventType="STAND";
+        int=1;
+        name="hello";
     }
     var connection = null;
 
     var serverUrl;
     serverUrl = "ws://" + window.location.hostname + ":9883";
+	
+	//serverUrl = "wss://buddavis-glorious-palm-tree-wr966wpw6wx35rgx-9883.preview.app.github.dev/";
     // Create the connection with the server
     connection = new WebSocket(serverUrl);
 
@@ -268,13 +270,11 @@
 
     function buttonclick(i) {
         U = new UserEvent();
-        U.Button = i;
-        if (idx == 0)
-            U.PlayerIdx = "XPLAYER";
-        else
-            U.PlayerIdx = "OPLAYER";
-        U.GameId = gameid;
+        U.event = "HIT";
+        U.playerID = 1;
+        U.name= "dunno";
+   
         connection.send(JSON.stringify(U));
-        console.log(JSON.stringify(U))
+        console.log("from buttonclick(0)" + JSON.stringify(U))
     }
 </script>
