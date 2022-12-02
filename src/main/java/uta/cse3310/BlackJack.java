@@ -62,6 +62,7 @@ public class BlackJack extends WebSocketServer {
     // this is the only time we send info to a single client.
     // it needs to know it's player ID.
     conn.send(player.asJSONString());
+    System.out.println("this is from a send " + player.asJSONString());
     synchronized (mutex) {
       game.addPlayer(player);
     }
