@@ -22,7 +22,7 @@ public class Game {
     Player currentplayer;
     Player firstPlayer;
     String gameMessage;
-    Deck d;
+    transient Deck d;
 
     public String exportStateAsJSON() {
         Gson gson = new Gson();
@@ -50,6 +50,20 @@ public class Game {
 
         if (event.event == UserEventType.NAME) {
             players.get(event.playerID).SetName(event.name);
+        }
+        if (event.event == UserEventType.STAND) {
+            System.out.println("HEY, IT WAS A STAND");
+        }
+        if (event.event == UserEventType.HIT) {
+            System.out.println("HEY, IT WAS A HIT");
+            //give player a card??
+            // turn = turn + 1;
+            // or it is the dealers turn??
+
+
+
+
+
         }
 
     }

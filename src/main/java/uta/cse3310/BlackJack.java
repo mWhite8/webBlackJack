@@ -96,16 +96,14 @@ public class BlackJack extends WebSocketServer {
 
   @Override
   public void onMessage(WebSocket conn, String message) {
-
+    System.out.println(conn + ": " + message);
     synchronized (mutex) {
       // all incoming messages are processed by the game
       game.processMessage(message);
       // and the results of that message are sent to everyone
       // as the "state of the game"
-
       broadcast(game.exportStateAsJSON());
     }
-    System.out.println(conn + ": " + message);
   }
 
   @Override
