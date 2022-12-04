@@ -102,13 +102,13 @@
         			<button id="hit-button"  onclick=buttonclick(0) >Hit</button>
         		</div>
         		<div class="col m6 s3">
-        			<button id="double-down-button" class="secondary">Double</button>
+        			<button id="double-down-button" onclick=buttonclick(1) >Double</button>
         		</div>
         		<div class="col m6 s3">
-        			<button id="stand-button" class="secondary">Stand</button>
+        			<button id="stand-button" onclick=buttonclick(2) >Stand</button>
         		</div>
         		<div class="col m6 s3">
-					<button class="disabled-button split-button" class="secondary">Split</button>
+					<button class="disabled-button split-button" onclick=buttonclick(3) >Split</button>
 				</div>
 			</div>
      	</div>
@@ -273,8 +273,52 @@
         U.event = "HIT";
         U.playerID = 1;
         U.name= "dunno";
+
+		
+        connection.send(JSON.stringify(U));
+        console.log("from buttonclick(0)" + JSON.stringify(U));
+		
+    }
+
+
+	function buttonclick(i) {
+        U = new UserEvent();
+        U.event = "DOUBLE";
+        U.playerID = 1;
+        U.name= "dunno";
+
    
         connection.send(JSON.stringify(U));
-        console.log("from buttonclick(0)" + JSON.stringify(U))
+		console.log("From buttonclick(1)" + JSON.stringify(U));
+		
     }
+
+
+	function buttonclick(i) {
+        U = new UserEvent();
+        U.event = "STAND";
+        U.playerID = 1;
+        U.name= "dunno";
+
+   
+        connection.send(JSON.stringify(U));
+		console.log("From buttonclick(2)" + JSON.stringify(U));
+		
+    }
+
+
+	function buttonclick(i) {
+        U = new UserEvent();
+        U.event = "SPLIT";
+        U.playerID = 1;
+        U.name= "dunno";
+
+   
+        connection.send(JSON.stringify(U));
+		console.log("From buttonclick(3)" + JSON.stringify(U));
+		
+    }
+
+
+
 </script>
